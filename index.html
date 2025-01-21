@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentas EC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #e6e6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            font-size: 16px;
+        }
+        header {
+            background: linear-gradient(135deg, #00C6FF, #0072FF);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 35px;
+            font-weight: bold;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        header img {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 150px;
+        }
+        header h1 {
+            flex: 1;
+        }
+        .sub-title {
+            font-size: 18px;
+            color: #FF914D;
+            margin-top: 10px;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .search-box {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        .search-box input {
+            padding: 12px;
+            width: 500px;
+            font-size: 18px;
+            border: 2px solid #00C6FF;
+            border-radius: 10px;
+            outline: none;
+            background-color: #1c1c1c;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus {
+            border-color: #0072FF;
+            background-color: #333;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .product {
+            background: #1f1f1f;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 300px;
+            text-align: center;
+            padding: 15px;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .product img:hover {
+            transform: scale(1.1);
+        }
+        .product h2 {
+            font-size: 24px;
+            color: #00C6FF;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product p {
+            font-size: 20px;
+            color: #e6e6e6;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .buy-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #00C6FF;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .buy-btn:hover {
+            background: #0072FF;
+            transform: scale(1.05);
+        }
+        .comments {
+            margin-top: 40px;
+            padding: 20px;
+            background: #00C6FF;
+            color: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .comments textarea {
+            width: 80%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+            background-color: #333;
+            color: white;
+        }
+        .comments button {
+            padding: 12px 20px;
+            margin-top: 15px;
+            background: #FF914D;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .comments button:hover {
+            background: #FF6F3C;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logocuentaec.png" alt="Logo de la tienda"> <!-- Cambia "logo.png" por la ruta de tu logo -->
+    <h1>Cuentas EC</h1>
+</header>
+
+<div class="sub-title">Encuentra las mejores cuentas a precios irresistibles</div>
+
+<div class="main-container">
+    <!-- Barra de búsqueda -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar productos..." onkeyup="searchProducts()">
+    </div>
+
+    <!-- Contenedor de productos -->
+    <div class="container" id="products"></div>
+
+    <!-- Sección de comentarios -->
+    <section class="comments">
+        <h2>Deja tu comentario</h2>
+        <textarea id="userComment" placeholder="Escribe tu comentario aquí..." rows="4"></textarea>
+        <button onclick="submitComment()">Enviar</button>
+        <div id="commentSection"></div>
+    </section>
+</div>
+
+<script>
+    const products = [
+        { name: "Netflix 1 	pantalla 28 - 30 días", price: "$3.80 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%201%20pantalla%2030%20días" },
+        { name: "Netflix 1 pantalla 15 días", price: "$2.20 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%201%20pantalla%2015%20días" },
+		{ name: "Netflix 2 pantallas 28 - 30 días", price: "$5.40 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%202%20pantallas%2030%20días" },
+		{ name: "Netflix 4 pantallas 28-30 días", price: "$10.80 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%204%20pantallas%2030%20días" },
+		{ name: "Prime Video 1 pantalla 28 - 30 días", price: "$3.60 USD", image: "primevideo.png", whatsapp: "Hola%20quiero%20comprar%20Prime%20Video%201%20pantalla%2030%20días" },
+        { name: "Prime Video 3 pantallas 88 - 90 días ", price: "$10.60 USD", image: "primevideo.png", whatsapp: "Hola%20quiero%20comprar%20Prime%20Video%203%20pantallas%2090%20días" },
+		{ name: "Disney+ Premiun 1 pantalla 28 - 30 días", price: "$3.80 USD", image: "disney.jpg", whatsapp: "Hola%20quiero%20comprar%20Disney%2B%201%20pantalla%2030%20días" },
+		{ name: "Disney+ Premium 4 pantallas 28 - 30 días", price: "$9.30 USD", image: "disney.jpg", whatsapp: "Hola%20quiero%20comprar%20Disney%2B%204%20pantallas%2030%20días" },
+        { name: "Max estandar 1 pantalla 28 - 30 días", price: "$2.50 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20estandar%201%20pantalla%2030%20días" },
+        { name: "Max platino 3 pantallas 28 - 30 días", price: "$5.60 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20platino%203%20pantallas%2030%20días" },
+        { name: "Max completo 2 pantallas 28 - 30 días", price: "$3.80 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20completo%202%20pantallas%2030%20días" },
+        { name: "Paramount+ 1 pantalla 28 - 30 días", price: "$1.50 USD", image: "paramount.png", whatsapp: "Hola%20quiero%20comprar%20Paramount%2B%201%20pantalla%2030%20días" },
+        { name: "Paramount+ completa 4 pantalla 28 - 30 días", price: "$2.9 USD", image: "paramount.png", whatsapp: "Hola%20quiero%20comprar%20Paramount%2B%204%20pantalla%2030%20días" },
+        { name: "Spotify Premium 1 dispositivo 28 - 30 días", price: "$4.30 USD", image: "spotify.jpg", whatsapp: "Hola%20quiero%20comprar%20Spotify%20Premium%201%20dispositivo%2030%20días" },
+        { name: "Spotify Premium 1 dispositivo 90 días", price: "$11.50 USD", image: "spotify.jpg", whatsapp: "Hola%20quiero%20comprar%20Spotify%20Premium%201%20dispositivo%2090%20días" },
+		{ name: "Windows 10 Pro  1 dispositivo", price: "$8.00 USD", image: "windows10.png", whatsapp: "Hola%20quiero%20comprar%20Windows%2010%20Pro" },
+        { name: "Windows 11 Pro 1 dispositivo", price: "$10.00 USD", image: "windows11.jpeg", whatsapp: "Hola%20quiero%20comprar%20Windows%2011%20Pro" },
+        { name: "Office 365 1 dispositivo 1 año", price: "$11.10 USD", image: "office365.png", whatsapp: "Hola%20quiero%20comprar%20Office%20365" },
+        { name: "Antivirus McAfee 1 dispositivo 1 año", price: "$10.70 USD", image: "mcafee.png", whatsapp: "Hola%20quiero%20comprar%20Antivirus%20McAfee" }
+    ];
+
+    const whatsappNumber = "593960053632";
+
+    function loadProducts() {
+        const container = document.getElementById('products');
+        products.forEach(product => {
+            container.innerHTML += `
+                <div class="product">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <p>${product.price}</p>
+                    <a href="https://wa.me/${whatsappNumber}?text=${product.whatsapp}" class="buy-btn">Comprar por WhatsApp</a>
+                </div>
+            `;
+        });
+    }
+
+    function searchProducts() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+        const container = document.getElementById('products');
+        container.innerHTML = ''; // Limpiar los productos actuales
+        filteredProducts.forEach(product => {
+            container.innerHTML += `
+                <div class="product">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <p>${product.price}</p>
+                    <a href="https://wa.me/${whatsappNumber}?text=${product.whatsapp}" class="buy-btn">Comprar por WhatsApp</a>
+                </div>
+            `;
+        });
+    }
+
+    function submitComment() {
+        const commentText = document.getElementById('userComment').value;
+        if (commentText.trim() !== "") {
+            const commentSection = document.getElementById('commentSection');
+            const newComment = document.createElement('p');
+            newComment.innerText = commentText;
+            commentSection.appendChild(newComment);
+            document.getElementById('userComment').value = ""; 
+            alert("¡Gracias por tu comentario!");
+        }
+    }
+
+    loadProducts();
+</script>
+
+</body>
+</html>
