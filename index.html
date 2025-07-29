@@ -1,283 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Cuentas EC - Venta de cuentas digitales como Netflix, Disney+, Spotify y más." />
-    <title>Cuentas EC</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuentas EC Tienda</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      color: #333;
+    }
 
-    <!-- Fuente personalizada -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
 
-        body {
-            background-color: #121212;
-            color: #e6e6e6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px;
-        }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #ffffffee;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
 
-        header {
-            background: linear-gradient(135deg, #00C6FF, #0072FF);
-            color: white;
-            padding: 20px;
-            font-size: 35px;
-            font-weight: bold;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+    h2 {
+      margin-top: 0;
+      font-size: 1.6em;
+      color: #2c3e50;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+    }
 
-        header img {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        .sub-title {
-            font-size: 18px;
-            color: #FF914D;
-            margin-top: 10px;
-            text-align: center;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
 
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
 
-        .search-box {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+      outline: none;
+    }
 
-        .search-box input {
-            padding: 12px;
-            width: 60%;
-            max-width: 500px;
-            font-size: 18px;
-            border: 2px solid #00C6FF;
-            border-radius: 10px;
-            background-color: #1c1c1c;
-            color: white;
-            transition: all 0.3s ease;
-        }
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
 
-        .search-box input:focus {
-            border-color: #0072FF;
-            background-color: #333;
-        }
+    button:hover {
+      background-color: #2980b9;
+    }
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
 
-        .product {
-            background: #1f1f1f;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            padding: 15px;
-        }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
 
-        .product:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
+    th {
+      background-color: #f1f1f1;
+    }
 
-        .product img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+    tr:hover {
+      background-color: #f9f9f9;
+    }
 
-        .product img:hover {
-            transform: scale(1.05);
-        }
-
-        .product h2 {
-            font-size: 20px;
-            color: #00C6FF;
-            margin: 15px 0 5px;
-        }
-
-        .product p {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .buy-btn {
-            display: inline-block;
-            padding: 10px 18px;
-            background: #00C6FF;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 10px;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .buy-btn:hover {
-            background: #0072FF;
-            transform: scale(1.05);
-        }
-
-        .comments {
-            margin-top: 50px;
-            padding: 25px;
-            background: #1f1f1f;
-            color: white;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .comments textarea {
-            width: 90%;
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            background-color: #333;
-            color: white;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        .comments button {
-            padding: 12px 20px;
-            margin-top: 15px;
-            background: #FF914D;
-            border: none;
-            color: white;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .comments button:hover {
-            background: #FF6F3C;
-            transform: scale(1.05);
-        }
-
-        #commentSection p {
-            margin-top: 15px;
-            background-color: #2a2a2a;
-            padding: 10px;
-            border-radius: 8px;
-            color: #ccc;
-        }
-    </style>
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <img src="logocuentaec.png" alt="Logo Cuentas EC" />
-        <h1>Cuentas EC</h1>
-    </header>
+  <header>
+    <h1>💼 Gestión de Cuentas EC Tienda</h1>
+  </header>
 
-    <div class="sub-title">Encuentra las mejores cuentas a precios irresistibles</div>
+  <div class="container">
+    <h2>Registrar Cuenta</h2>
+    <form id="cuentaForm">
+      <div class="form-group">
+        <label for="nombre">Nombre de la Cuenta</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" required />
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" name="precio" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado">
+          <option value="Disponible">Disponible</option>
+          <option value="Vendido">Vendido</option>
+          <option value="Reservado">Reservado</option>
+        </select>
+      </div>
+      <button type="submit">Guardar Cuenta</button>
+    </form>
 
-    <div class="main-container">
+    <h2 style="margin-top: 40px;">📋 Cuentas Registradas</h2>
+    <table id="tablaCuentas">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Precio</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cuentas se insertan aquí -->
+      </tbody>
+    </table>
+  </div>
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Buscar productos..." onkeyup="searchProducts()" />
-        </div>
+  <div class="footer">
+    &copy; 2025 EC Tienda. Todos los derechos reservados.
+  </div>
 
-        <div class="container" id="products"></div>
+  <script>
+    const cuentaForm = document.getElementById("cuentaForm");
+    const tablaCuentas = document.querySelector("#tablaCuentas tbody");
+    let contador = 1;
 
-        <section class="comments">
-            <h2>Deja tu comentario</h2>
-            <textarea id="userComment" placeholder="Escribe tu comentario aquí..." rows="4"></textarea><br />
-            <button onclick="submitComment()">Enviar</button>
-            <div id="commentSection"></div>
-        </section>
+    cuentaForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    </div>
+      const nombre = document.getElementById("nombre").value;
+      const usuario = document.getElementById("usuario").value;
+      const precio = parseFloat(document.getElementById("precio").value).toFixed(2);
+      const estado = document.getElementById("estado").value;
 
-    <script>
-        const whatsappNumber = "593969848119";
+      // Insertar fila a la tabla
+      const fila = tablaCuentas.insertRow();
+      fila.innerHTML = `
+        <td>${contador++}</td>
+        <td>${nombre}</td>
+        <td>${usuario}</td>
+        <td>$${precio}</td>
+        <td>${estado}</td>
+      `;
 
-        const products = [/* productos aquí... */];
+      // Alerta simple
+      alert("✅ Cuenta registrada exitosamente.");
 
-        function loadProducts() {
-            const container = document.getElementById('products');
-            container.innerHTML = '';
-            products.forEach(product => {
-                container.innerHTML += `
-                    <div class="product">
-                        <img src="${product.image}" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>${product.price}</p>
-                        <a href="https://wa.me/${whatsappNumber}?text=${product.whatsapp}" class="buy-btn">Comprar por WhatsApp</a>
-                    </div>
-                `;
-            });
-        }
-
-        function searchProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-            const container = document.getElementById('products');
-            container.innerHTML = '';
-            filtered.forEach(product => {
-                container.innerHTML += `
-                    <div class="product">
-                        <img src="${product.image}" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>${product.price}</p>
-                        <a href="https://wa.me/${whatsappNumber}?text=${product.whatsapp}" class="buy-btn">Comprar por WhatsApp</a>
-                    </div>
-                `;
-            });
-        }
-
-        function submitComment() {
-            const text = document.getElementById('userComment').value.trim();
-            if (text !== "") {
-                const section = document.getElementById('commentSection');
-                const comment = document.createElement('p');
-                comment.innerText = text;
-                section.appendChild(comment);
-                document.getElementById('userComment').value = "";
-                alert("¡Gracias por tu comentario!");
-            }
-        }
-
-        loadProducts();
-    </script>
+      // Resetear formulario
+      cuentaForm.reset();
+    });
+  </script>
 </body>
 </html>
