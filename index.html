@@ -47,9 +47,10 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 10px;
+            object-fit: cover;
         }
 
         .sub-title {
@@ -91,11 +92,11 @@
         }
 
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             width: 100%;
+            max-width: 1200px;
         }
 
         .product {
@@ -103,7 +104,6 @@
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 300px;
             text-align: center;
             padding: 15px;
         }
@@ -115,7 +115,7 @@
 
         .product img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             border-radius: 10px;
             transition: transform 0.3s ease;
@@ -128,11 +128,11 @@
         .product h2 {
             font-size: 20px;
             color: #00C6FF;
-            margin: 15px 0;
+            margin: 15px 0 5px;
         }
 
         .product p {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             margin-bottom: 15px;
         }
@@ -156,7 +156,7 @@
         .comments {
             margin-top: 50px;
             padding: 25px;
-            background: #00C6FF;
+            background: #1f1f1f;
             color: white;
             border-radius: 20px;
             width: 100%;
@@ -192,6 +192,14 @@
             background: #FF6F3C;
             transform: scale(1.05);
         }
+
+        #commentSection p {
+            margin-top: 15px;
+            background-color: #2a2a2a;
+            padding: 10px;
+            border-radius: 8px;
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -223,27 +231,7 @@
     <script>
         const whatsappNumber = "593969848119";
 
-        const products = [
-            { name: "Netflix 1 pantalla 28-30 días", price: "$3.80 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%201%20pantalla%2030%20días" },
-            { name: "Netflix 1 pantalla 15 días", price: "$2.20 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%201%20pantalla%2015%20días" },
-            { name: "Netflix 2 pantallas 28-30 días", price: "$5.40 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%202%20pantallas%2030%20días" },
-            { name: "Netflix 4 pantallas 28-30 días", price: "$10.80 USD", image: "netflix.png", whatsapp: "Hola%20quiero%20comprar%20Netflix%204%20pantallas%2030%20días" },
-            { name: "Prime Video 1 pantalla 30 días", price: "$3.60 USD", image: "primevideo.png", whatsapp: "Hola%20quiero%20comprar%20Prime%20Video%201%20pantalla%2030%20días" },
-            { name: "Prime Video 3 pantallas 90 días", price: "$10.60 USD", image: "primevideo.png", whatsapp: "Hola%20quiero%20comprar%20Prime%20Video%203%20pantallas%2090%20días" },
-            { name: "Disney+ 1 pantalla 30 días", price: "$3.80 USD", image: "disney.jpg", whatsapp: "Hola%20quiero%20comprar%20Disney%2B%201%20pantalla%2030%20días" },
-            { name: "Disney+ 4 pantallas 30 días", price: "$9.30 USD", image: "disney.jpg", whatsapp: "Hola%20quiero%20comprar%20Disney%2B%204%20pantallas%2030%20días" },
-            { name: "Max estándar 1 pantalla 30 días", price: "$2.50 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20estándar%201%20pantalla%2030%20días" },
-            { name: "Max platino 3 pantallas 30 días", price: "$5.60 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20platino%203%20pantallas%2030%20días" },
-            { name: "Max completo 2 pantallas 30 días", price: "$3.80 USD", image: "max.jpeg", whatsapp: "Hola%20quiero%20comprar%20Max%20completo%202%20pantallas%2030%20días" },
-            { name: "Paramount+ 1 pantalla 30 días", price: "$1.50 USD", image: "paramount.png", whatsapp: "Hola%20quiero%20comprar%20Paramount%2B%201%20pantalla%2030%20días" },
-            { name: "Paramount+ 4 pantallas 30 días", price: "$2.90 USD", image: "paramount.png", whatsapp: "Hola%20quiero%20comprar%20Paramount%2B%204%20pantallas%2030%20días" },
-            { name: "Spotify Premium 1 dispositivo 30 días", price: "$4.30 USD", image: "spotify.jpg", whatsapp: "Hola%20quiero%20comprar%20Spotify%20Premium%201%20dispositivo%2030%20días" },
-            { name: "Spotify Premium 1 dispositivo 90 días", price: "$11.50 USD", image: "spotify.jpg", whatsapp: "Hola%20quiero%20comprar%20Spotify%20Premium%201%20dispositivo%2090%20días" },
-            { name: "Windows 10 Pro", price: "$8.00 USD", image: "windows10.png", whatsapp: "Hola%20quiero%20comprar%20Windows%2010%20Pro" },
-            { name: "Windows 11 Pro", price: "$10.00 USD", image: "windows11.jpeg", whatsapp: "Hola%20quiero%20comprar%20Windows%2011%20Pro" },
-            { name: "Office 365 1 año", price: "$11.10 USD", image: "office365.png", whatsapp: "Hola%20quiero%20comprar%20Office%20365" },
-            { name: "Antivirus McAfee 1 año", price: "$10.70 USD", image: "mcafee.png", whatsapp: "Hola%20quiero%20comprar%20Antivirus%20McAfee" }
-        ];
+        const products = [/* productos aquí... */];
 
         function loadProducts() {
             const container = document.getElementById('products');
@@ -289,10 +277,7 @@
             }
         }
 
-        // Cargar productos al iniciar
         loadProducts();
     </script>
-
 </body>
 </html>
-
