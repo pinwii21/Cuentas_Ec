@@ -2,116 +2,222 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cuentas EC Tienda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EC Tienda - Gestión de Cuentas</title>
   <style>
+    /* Importación de fuente moderna */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    /* Variables de color */
+    :root {
+      --primary-color: #4a90e2;
+      --primary-dark: #357ABD;
+      --background-gradient: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+      --text-color: #2c3e50;
+      --white: #fff;
+      --light-gray: #f7f9fc;
+      --shadow-color: rgba(0,0,0,0.1);
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+    }
+
+    /* Reset y base */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      color: #333;
+      font-family: 'Poppins', sans-serif;
+      background: var(--background-gradient);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
     header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 20px 0;
+      width: 100%;
+      max-width: 900px;
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 25px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 20px var(--shadow-color);
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+      user-select: none;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2em;
-      letter-spacing: 1px;
+      font-weight: 600;
+      font-size: 1.9rem;
+      letter-spacing: 1.5px;
     }
 
-    .container {
+    main {
+      width: 100%;
       max-width: 900px;
-      margin: 40px auto;
-      background-color: #ffffffee;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
     }
 
+    /* Títulos */
     h2 {
-      margin-top: 0;
-      font-size: 1.6em;
-      color: #2c3e50;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 10px;
+      margin: 0 0 20px 0;
+      font-size: 1.7rem;
+      font-weight: 600;
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 8px;
+      color: var(--primary-dark);
     }
 
-    .form-group {
-      margin-bottom: 20px;
+    /* Formulario */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 30px;
+      align-items: flex-start;
+    }
+
+    form .form-group {
+      display: flex;
+      flex-direction: column;
     }
 
     label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-color);
+      user-select: none;
     }
 
     input[type="text"],
     input[type="number"],
     select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
+      padding: 12px 15px;
+      border: 2px solid #d1dbe8;
       border-radius: 8px;
-      transition: 0.3s;
+      font-size: 1rem;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+      font-family: inherit;
+      outline-offset: 2px;
     }
 
     input[type="text"]:focus,
     input[type="number"]:focus,
     select:focus {
-      border-color: #3498db;
-      box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px var(--primary-color);
+    }
+
+    /* Botón */
+    form button {
+      grid-column: 1 / -1;
+      justify-self: center;
+      background: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 14px 45px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      transition: background-color var(--transition-speed);
+      user-select: none;
+      margin-top: 10px;
+    }
+
+    form button:hover,
+    form button:focus {
+      background: var(--primary-dark);
       outline: none;
     }
 
-    button {
-      background-color: #3498db;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
+    /* Tabla */
     table {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 30px;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      font-size: 1rem;
+      user-select: none;
     }
 
-    th, td {
-      padding: 12px;
+    thead tr {
+      background: var(--primary-color);
+      color: var(--white);
       text-align: left;
-      border-bottom: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
-    th {
-      background-color: #f1f1f1;
+    thead th {
+      padding: 14px 20px;
+      font-weight: 600;
+      border-top-left-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+      letter-spacing: 0.05em;
     }
 
-    tr:hover {
-      background-color: #f9f9f9;
+    tbody tr {
+      background: var(--light-gray);
+      box-shadow: 0 2px 6px var(--shadow-color);
+      border-radius: var(--border-radius);
+      transition: background-color 0.25s ease;
     }
 
-    .footer {
+    tbody tr:hover {
+      background-color: #dbe9ff;
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      vertical-align: middle;
+      border-bottom: none;
+    }
+
+    tbody tr:last-child td {
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+    }
+
+    /* Número de fila centrado */
+    tbody td:first-child {
       text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 0.9em;
+      font-weight: 600;
+      color: var(--primary-dark);
+      width: 40px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
       color: #555;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main {
+        padding: 20px 25px;
+      }
+      form {
+        grid-template-columns: 1fr;
+      }
+      form button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -121,52 +227,58 @@
     <h1>💼 Gestión de Cuentas EC Tienda</h1>
   </header>
 
-  <div class="container">
-    <h2>Registrar Cuenta</h2>
-    <form id="cuentaForm">
-      <div class="form-group">
-        <label for="nombre">Nombre de la Cuenta</label>
-        <input type="text" id="nombre" name="nombre" required />
-      </div>
-      <div class="form-group">
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" name="usuario" required />
-      </div>
-      <div class="form-group">
-        <label for="precio">Precio</label>
-        <input type="number" id="precio" name="precio" step="0.01" required />
-      </div>
-      <div class="form-group">
-        <label for="estado">Estado</label>
-        <select id="estado" name="estado">
-          <option value="Disponible">Disponible</option>
-          <option value="Vendido">Vendido</option>
-          <option value="Reservado">Reservado</option>
-        </select>
-      </div>
-      <button type="submit">Guardar Cuenta</button>
-    </form>
+  <main>
+    <section aria-label="Registro de cuentas">
+      <h2>Registrar Cuenta</h2>
+      <form id="cuentaForm" autocomplete="off" novalidate>
+        <div class="form-group">
+          <label for="nombre">Nombre de la Cuenta</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. Netflix Premium" required />
+        </div>
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" name="usuario" placeholder="Ej. usuario123" required />
+        </div>
+        <div class="form-group">
+          <label for="precio">Precio (USD)</label>
+          <input type="number" id="precio" name="precio" step="0.01" min="0" placeholder="Ej. 12.99" required />
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado" required>
+            <option value="" disabled selected>Selecciona un estado</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Vendido">Vendido</option>
+            <option value="Reservado">Reservado</option>
+          </select>
+        </div>
+        <button type="submit" aria-label="Guardar cuenta">Guardar Cuenta</button>
+      </form>
+    </section>
 
-    <h2 style="margin-top: 40px;">📋 Cuentas Registradas</h2>
-    <table id="tablaCuentas">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nombre</th>
-          <th>Usuario</th>
-          <th>Precio</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Cuentas se insertan aquí -->
-      </tbody>
-    </table>
-  </div>
+    <section aria-label="Cuentas registradas">
+      <h2>📋 Cuentas Registradas</h2>
+      <table id="tablaCuentas" aria-describedby="tabla-description">
+        <caption id="tabla-description" class="sr-only">Lista de cuentas registradas en la tienda EC</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cuentas se insertan aquí -->
+        </tbody>
+      </table>
+    </section>
+  </main>
 
-  <div class="footer">
+  <footer>
     &copy; 2025 EC Tienda. Todos los derechos reservados.
-  </div>
+  </footer>
 
   <script>
     const cuentaForm = document.getElementById("cuentaForm");
@@ -176,10 +288,17 @@
     cuentaForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const nombre = document.getElementById("nombre").value;
-      const usuario = document.getElementById("usuario").value;
-      const precio = parseFloat(document.getElementById("precio").value).toFixed(2);
+      const nombre = document.getElementById("nombre").value.trim();
+      const usuario = document.getElementById("usuario").value.trim();
+      const precioInput = document.getElementById("precio").value;
       const estado = document.getElementById("estado").value;
+
+      if (!nombre || !usuario || !precioInput || !estado) {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+      }
+
+      const precio = parseFloat(precioInput).toFixed(2);
 
       // Insertar fila a la tabla
       const fila = tablaCuentas.insertRow();
@@ -191,11 +310,10 @@
         <td>${estado}</td>
       `;
 
-      // Alerta simple
       alert("✅ Cuenta registrada exitosamente.");
-
-      // Resetear formulario
       cuentaForm.reset();
+      document.getElementById("estado").selectedIndex = 0;
+      document.getElementById("nombre").focus();
     });
   </script>
 </body>
